@@ -1,7 +1,6 @@
 const http = require('http');
 var fs = require('fs');
 var path = require('path');
-var filePath = '/tmp/text.png';
 
 const server = http.createServer( (req, res) => {
   // req is an http.IncomingMessage, which is a Readable Stream
@@ -24,28 +23,9 @@ const server = http.createServer( (req, res) => {
     ctx.lineTo(50 + te.width, 102);
     ctx.stroke();
 
-    var out = fs.createWriteStream(filePath)
-    , stream = canvas.pngStream();
+    var stream = canvas.pngStream();
 
-    stream.on('data', function(chunk) {
-        out.write(chunk);
-        console.log('c');
-    });
-
-    stream.on('end', function(){
-        console.log('e');
-    });
-    
-    var stat = fs.statSync(filePath);
-
-    res.writeHead(200, {
-        'Content-Type': 'image/png',
-        'Content-Length': stat.size
-    });
-
-    var readStream = fs.createReadStream(filePath);
-    // We replaced all the event handlers with a simple call to readStream.pipe()
-    readStream.pipe(res);
+    stream.pipe(res);
 });
 
 server.listen(1337);
