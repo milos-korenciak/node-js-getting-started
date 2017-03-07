@@ -28,4 +28,4 @@ const server = http.createServer( (req, res) => {
     stream.pipe(res);
 });
 
-server.listen(1337);
+server.listen(process.env.PORT || 5000);
