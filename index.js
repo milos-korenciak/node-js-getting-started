@@ -1,5 +1,8 @@
 var express = require('express');
 var app = express();
+var fs = require('fs');
+var path = require('path');
+var filePath = '/tmp/text.png';
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -14,11 +17,13 @@ app.get('/', function(request, response) {
 });
 
 app.get('/testPng', function(request, response) {
+  
   var Canvas = require('canvas')
   , Image = Canvas.Image
   , canvas = new Canvas(200, 200)
-  , ctx = canvas.getContext('2d');
-
+  , ctx = canvas.getContext('2d')
+  , body = '';  
+  
   ctx.font = '30px Impact';
   ctx.rotate(.1);
   ctx.fillText("Fungujeeeeeeeem!", 50, 100);
@@ -30,25 +35,18 @@ app.get('/testPng', function(request, response) {
   ctx.lineTo(50 + te.width, 102);
   ctx.stroke();
  
-//   var fs = require('fs')
-//   , out = fs.createWriteStream('/tmp/text.png')
-//   , stream = canvas.pngStream();
+  var out = fs.createWriteStream(filePath)
+  , stream = canvas.pngStream();
 
-//   stream.on('data', function(chunk){
-//       out.write(chunk);
-//   });
+  stream.on('data', function(chunk) {
+      out.write(chunk);
+      console.log('c');
+  });
 
-//   stream.on('end', function(){
-//      console.log('saved png');
-//   });
-
-//  stream.on('end', function(){
-//      console.log('saved png');
-//  });
-
-  response.sendFile("/tmp/text.png", {}, function (){
-        //fs.unlink("/tmp/text.png"); // delete the file
-   })
+  stream.on('end', function(){
+      console.log('e');
+      response.sendFile(filePath);
+  });
 });
 
 app.listen(app.get('port'), function() {
