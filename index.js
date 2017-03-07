@@ -35,15 +35,19 @@ app.get('/testPng', function(request, response) {
 //   , stream = canvas.pngStream();
 
 //   stream.on('data', function(chunk){
-// 	  out.write(chunk);
+//       out.write(chunk);
 //   });
 
 //   stream.on('end', function(){
-//     console.log('saved png');
+//      console.log('saved png');
 //   });
 
+//  stream.on('end', function(){
+//      console.log('saved png');
+//  });
+
   response.sendFile("/tmp/text.png", {}, function (){
-        fs.unlink("/tmp/text.png"); // delete the file
+        //fs.unlink("/tmp/text.png"); // delete the file
    })
 });
 
