@@ -30,22 +30,21 @@ app.get('/testPng', function(request, response) {
   ctx.lineTo(50 + te.width, 102);
   ctx.stroke();
  
-  
-  var fs = require('fs')
-  , out = fs.createWriteStream('/tmp/text.png')
-  , stream = canvas.pngStream();
+//   var fs = require('fs')
+//   , out = fs.createWriteStream('/tmp/text.png')
+//   , stream = canvas.pngStream();
 
-  stream.on('data', function(chunk){
-	  out.write(chunk);
-  });
+//   stream.on('data', function(chunk){
+// 	  out.write(chunk);
+//   });
 
-  stream.on('end', function(){
-    console.log('saved png');
-  });
+//   stream.on('end', function(){
+//     console.log('saved png');
+//   });
 
   response.sendFile("/tmp/text.png", {}, function (){
         fs.unlink("/tmp/text.png"); // delete the file
-    })
+   })
 });
 
 app.listen(app.get('port'), function() {
