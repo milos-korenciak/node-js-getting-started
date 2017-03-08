@@ -1,8 +1,8 @@
 {
-  "name": "Start on Heroku: Node.js",
-  "description": "A barebones Node.js app using Express 4",
-  "repository": "https://github.com/heroku/node-js-getting-started",
+  "name": "Canvas on Heroku through Node.js",
+  "description": "A barebones Node.js canvas project",
+  "repository": "https://github.com/milos-korenciak/node-js-getting-started",
   "logo": "http://node-js-sample.herokuapp.com/node.svg",
-  "keywords": ["node", "express", "static"],
+  "keywords": ["node", "canvas"],
   "image": "heroku/nodejs"
 }
